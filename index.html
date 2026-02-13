@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A futuristic, fun, and visually engaging Tic-Tac-Toe game">
+    <title>Neon Tic-Tac-Toe | Futuristic Game</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Orbitron:wght@400;700;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="background-container">
+        <div class="gradient-bg"></div>
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+        <div class="floating-shape shape-4"></div>
+        <div class="floating-shape shape-5"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title" role="heading" aria-level="1">
+                <span class="neon-text">NEON</span>
+                <span class="neon-text-alt">TIC-TAC-TOE</span>
+            </h1>
+            <p class="subtitle">Experience the future of grid gaming</p>
+        </header>
+
+        <!-- Controls Bar -->
+        <div class="controls-bar">
+            <div class="theme-sound-controls">
+                <button id="themeToggle" class="control-btn" aria-label="Toggle dark/light theme" title="Toggle Theme">
+                    <span class="icon-sun">☀️</span>
+                    <span class="icon-moon">🌙</span>
+                </button>
+                <button id="soundToggle" class="control-btn" aria-label="Toggle sound effects" title="Toggle Sound">
+                    <span class="icon-sound-on">🔊</span>
+                    <span class="icon-sound-off">🔇</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar: Game History & Stats -->
+            <aside class="sidebar left-sidebar">
+                <div class="panel stats-panel">
+                    <h2>📊 SESSION STATS</h2>
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <div class="stat-label">Wins</div>
+                            <div class="stat-value" id="statsWins">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Losses</div>
+                            <div class="stat-value" id="statsLosses">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Draws</div>
+                            <div class="stat-value" id="statsDraws">0</div>
+                        </div>
+                    </div>
+                    <div class="stats-secondary">
+                        <div class="stat-mini">
+                            <span class="label">Win Rate</span>
+                            <span class="value" id="winRate">0%</span>
+                        </div>
+                        <div class="stat-mini">
+                            <span class="label">Streak 🔥</span>
+                            <span class="value" id="streak">0</span>
+                        </div>
+                        <div class="stat-mini">
+                            <span class="label">Difficulty</span>
+                            <span class="value" id="difficultyDisplay">Easy</span>
+                        </div>
+                    </div>
+                    <button id="resetStatsBtn" class="btn-secondary" aria-label="Reset statistics">
+                        Reset Stats
+                    </button>
+                </div>
+
+                <div class="panel history-panel">
+                    <h2>⏱️ HISTORY</h2>
+                    <div class="history-list" id="historyList">
+                        <p class="empty-message">No games yet</p>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Center: Game Board -->
+            <main class="game-section">
+                <!-- Game Mode Selector -->
+                <div id="modeSelector" class="mode-selector">
+                    <div class="mode-card">
+                        <h3>Player vs Player</h3>
+                        <button class="btn-primary" data-mode="pvp" aria-label="Start Player vs Player game">
+                            👥 Play
+                        </button>
+                    </div>
+                    <div class="mode-card">
+                        <h3>Player vs AI</h3>
+                        <button class="btn-primary" data-mode="pva" aria-label="Start Player vs AI game">
+                            🤖 Play
+                        </button>
+                    </div>
+                </div>
+
+                <!-- AI Difficulty Selector -->
+                <div id="difficultySelector" class="difficulty-selector hidden">
+                    <h3>Select AI Difficulty</h3>
+                    <div class="difficulty-buttons">
+                        <button class="difficulty-btn" data-difficulty="easy" aria-label="Easy difficulty">
+                            <span class="emoji">🟢</span>
+                            <span>Easy</span>
+                        </button>
+                        <button class="difficulty-btn" data-difficulty="medium" aria-label="Medium difficulty">
+                            <span class="emoji">🟡</span>
+                            <span>Medium</span>
+                        </button>
+                        <button class="difficulty-btn" data-difficulty="impossible" aria-label="Impossible difficulty">
+                            <span class="emoji">🔴</span>
+                            <span>Impossible</span>
+                        </button>
+                    </div>
+                    <button id="backBtn" class="btn-secondary" aria-label="Go back to mode selection">
+                        ← Back
+                    </button>
+                </div>
+
+                <!-- Game Board -->
+                <div id="gameBoard" class="game-board hidden">
+                    <!-- Turn Indicator -->
+                    <div class="turn-indicator">
+                        <div class="player-info">
+                            <span class="avatar" id="p1Avatar">👤</span>
+                            <span class="player-name" id="p1Name">Player 1</span>
+                            <span class="status" id="p1Status"></span>
+                        </div>
+                        <div class="vs-text">VS</div>
+                        <div class="player-info">
+                            <span class="status" id="p2Status"></span>
+                            <span class="player-name" id="p2Name">Player 2</span>
+                            <span class="avatar" id="p2Avatar">👤</span>
+                        </div>
+                    </div>
+
+                    <!-- Game Grid -->
+                    <div class="grid-container">
+                        <div class="game-grid" id="grid">
+                            <button class="cell" data-index="0" aria-label="Cell 1"></button>
+                            <button class="cell" data-index="1" aria-label="Cell 2"></button>
+                            <button class="cell" data-index="2" aria-label="Cell 3"></button>
+                            <button class="cell" data-index="3" aria-label="Cell 4"></button>
+                            <button class="cell" data-index="4" aria-label="Cell 5"></button>
+                            <button class="cell" data-index="5" aria-label="Cell 6"></button>
+                            <button class="cell" data-index="6" aria-label="Cell 7"></button>
+                            <button class="cell" data-index="7" aria-label="Cell 8"></button>
+                            <button class="cell" data-index="8" aria-label="Cell 9"></button>
+                        </div>
+                        <!-- Winning Line SVG -->
+                        <svg class="winning-line" viewBox="0 0 300 300" preserveAspectRatio="none">
+                            <line class="line" x1="0" y1="0" x2="0" y2="0" />
+                        </svg>
+                    </div>
+
+                    <!-- Game Info -->
+                    <div class="game-info">
+                        <div id="message" class="message"></div>
+                        <div class="ai-thinking" id="aiThinking">
+                            <span class="spinner"></span>
+                            <span>AI is thinking...</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="button-group">
+                        <button id="undoBtn" class="btn-secondary" aria-label="Undo last move" title="Undo">
+                            ↶ Undo
+                        </button>
+                        <button id="restartBtn" class="btn-primary" aria-label="Restart current game">
+                            🔄 Restart
+                        </button>
+                        <button id="newGameBtn" class="btn-primary" aria-label="Start a new game">
+                            ✨ New Game
+                        </button>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Sidebar: AI Taunts -->
+            <aside class="sidebar right-sidebar">
+                <div class="panel taunts-panel">
+                    <h2>💬 AI SAYS</h2>
+                    <div class="ai-message" id="aiMessage">
+                        Ready to play? 🎮
+                    </div>
+                </div>
+
+                <div class="panel theme-panel">
+                    <h2>🎨 THEMES</h2>
+                    <div class="theme-buttons">
+                        <button class="theme-btn" data-theme="cyber" aria-label="Cyber theme" title="Cyber">
+                            <span>🔷</span> Cyber
+                        </button>
+                        <button class="theme-btn" data-theme="sunset" aria-label="Sunset theme" title="Sunset">
+                            <span>🧡</span> Sunset
+                        </button>
+                        <button class="theme-btn" data-theme="ocean" aria-label="Ocean theme" title="Ocean">
+                            <span>💙</span> Ocean
+                        </button>
+                        <button class="theme-btn" data-theme="forest" aria-label="Forest theme" title="Forest">
+                            <span>💚</span> Forest
+                        </button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Winner Modal -->
+    <div id="winnerModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Victory!</h2>
+                <span class="emoji-celebration" id="modalEmoji">🎉</span>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessage">Congratulations!</p>
+                <div class="particle-container" id="particleContainer"></div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-buttons">
+                    <button id="modalRematchBtn" class="btn-primary" aria-label="Restart current game">
+                        🔄 Rematch
+                    </button>
+                    <button id="modalMenuBtn" class="btn-secondary" aria-label="Go to main menu">
+                        🏠 Main Menu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Keyboard Shortcut Help Modal -->
+    <div id="helpModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⌨️ Keyboard Shortcuts</h2>
+                <button id="closeHelpBtn" class="close-btn" aria-label="Close help">×</button>
+            </div>
+            <div class="modal-body">
+                <ul class="shortcuts-list">
+                    <li><kbd>1</kbd>-<kbd>9</kbd>: Click cells</li>
+                    <li><kbd>R</kbd>: Restart game</li>
+                    <li><kbd>U</kbd>: Undo move</li>
+                    <li><kbd>N</kbd>: New game</li>
+                    <li><kbd>T</kbd>: Toggle theme</li>
+                    <li><kbd>S</kbd>: Toggle sound</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sound Effects (using Web Audio API) -->
+    <div id="audioContext" style="display: none;"></div>
+
+    <!-- JavaScript Modules -->
+    <script src="js/utils.js"></script>
+    <script src="js/ai.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
