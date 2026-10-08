@@ -1,71 +1,58 @@
-# PRODIGY_WD_03
+# Tic Tac Toe Game
 
-## Task-03: Futuristic Tic-Tac-Toe Web Application
+A futuristic Tic Tac Toe web application built with HTML, CSS, and JavaScript as part of the Prodigy InfoTech Web Development Internship.
 
-### Description
-This project is a feature-rich and visually enhanced **Tic-Tac-Toe web application** developed as **Task-03** of the **Web Development Internship at Prodigy InfoTech**.
+## Overview
 
-The application goes beyond a basic implementation by integrating AI gameplay, animated UI elements, persistent score tracking, and interactive game feedback.
+This project expands a classic Tic Tac Toe game with multiple gameplay modes, AI difficulty levels, persistent score tracking, sound effects, match history, and responsive animated UI.
 
----
+## Features
 
-### Features
+- Player vs Player mode
+- Player vs AI mode
+- AI difficulty levels: Easy, Medium, and Impossible
+- Minimax algorithm for optimal AI gameplay
+- Real-time win and draw detection
+- Undo last move support
+- Turn indicator
+- Animated winning line and highlighted winning cells
+- Persistent scoreboard using localStorage
+- Last 5 match history tracking
+- Reset scoreboard option
+- Modal popup for game results
+- Sound effects with sound toggle
+- Confetti animation on win
+- Responsive layout
 
-#### 🎮 Game Modes
-- Player vs Player  
-- Player vs AI:
-  - Easy → Random moves  
-  - Medium → Defensive strategy  
-  - Impossible → Minimax algorithm  
+## Tech Stack
 
-#### 🧠 Gameplay Logic
-- Real-time win detection  
-- Draw detection  
-- Undo last move feature  
-- Turn indicator  
-- Animated winning line aligned with winning cells  
+- HTML
+- CSS
+- JavaScript
+- localStorage
 
-#### 📊 Score & History
-- Persistent scoreboard using localStorage  
-- Game statistics (Wins, Losses, Draws)  
-- Last 5 match history tracking  
-- Reset scoreboard option  
+## Project Structure
 
-#### 🎨 UI & Experience
-- Futuristic animated interface  
-- Glassmorphism board design  
-- Responsive layout (mobile-friendly)  
-- Winning cell highlight and animations  
-- Modal popup for winner announcement  
-- Smooth transitions and micro-interactions  
+```text
+css/
+  style.css
+js/
+  ai.js
+  game.js
+  main.js
+  ui.js
+  utils.js
+index.html
+```
 
-#### 🔊 Interactivity
-- Sound effects (click, win, draw)  
-- Sound toggle option  
-- Confetti animation on win  
+## How It Works
 
----
+Game state is managed with JavaScript arrays. Win combinations are checked after each move, while the AI uses different strategies depending on the selected difficulty. Score and match history are stored in localStorage so progress remains available between sessions.
 
-### Technologies Used
-- HTML  
-- CSS  
-- JavaScript  
-(No external frameworks or libraries)
+## Author
 
----
+Gowsic M S
 
-### How It Works
-- Game state is managed using JavaScript arrays.  
-- Win combinations are checked dynamically after each move.  
-- The AI uses the Minimax algorithm in Impossible mode for optimal play.  
-- Scores and match history are stored in localStorage for persistence.  
-- UI updates are handled through DOM manipulation and CSS animations.
+## Internship
 
-
-### Author
-**Gowsic M S**
-
----
-
-### Internship
-**Prodigy InfoTech – Web Development Internship**
+Prodigy InfoTech - Web Development Internship
